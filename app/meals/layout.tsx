@@ -1,0 +1,14 @@
+import type {ReactNode} from 'react';
+
+type Props = {
+    children: ReactNode;
+};
+
+export default function MealsLayout({children}: Props) {
+    return (
+        <>
+            <p>Meals layout</p>
+            {children}
+        </>
+    );
+}
