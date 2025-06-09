@@ -7,7 +7,6 @@ type Props = {
 export default function MealsLayout({children}: Props) {
     return (
         <>
-            <p>Meals layout</p>
             {children}
         </>
     );
