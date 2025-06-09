@@ -2,8 +2,10 @@ import Link from "next/link";
 import logoImg from '@/assets/logo.png'
 import Image from "next/image";
 import MainHeaderBackground from "@/components/main-header/main-header-background";
+import NavLink from "@/components/main-header/nav-link";
 
 export default function MainHeader() {
+
     return (
         <>
             <MainHeaderBackground/>
@@ -26,37 +28,10 @@ export default function MainHeader() {
                 <nav>
                     <ul className='flex gap-6 text-lg list-none m-0 p-0'>
                         <li>
-                            <Link
-                                href="/meals"
-                                className='no-underline text-[#ddd6cb] font-bold px-4 py-2 rounded-md
-                         hover:bg-gradient-to-r hover:from-[#ff8a05] hover:to-[#f9b331]
-                         hover:bg-clip-text hover:text-transparent
-                         hover:drop-shadow-[0_0_18px_rgba(248,190,42,0.8)]'
-                            >
-                                Meals
-                            </Link>
+                            <NavLink href="/meals">Browse Meals</NavLink>
                         </li>
                         <li>
-                            <Link
-                                href="/meals/share"
-                                className='no-underline text-[#ddd6cb] font-bold px-4 py-2 rounded-md
-                         hover:bg-gradient-to-r hover:from-[#ff8a05] hover:to-[#f9b331]
-                         hover:bg-clip-text hover:text-transparent
-                         hover:drop-shadow-[0_0_18px_rgba(248,190,42,0.8)]'
-                            >
-                                Share Meals
-                            </Link>
-                        </li>
-                        <li>
-                            <Link
-                                href="/community"
-                                className='no-underline text-[#ddd6cb] font-bold px-4 py-2 rounded-md
-                         hover:bg-gradient-to-r hover:from-[#ff8a05] hover:to-[#f9b331]
-                         hover:bg-clip-text hover:text-transparent
-                         hover:drop-shadow-[0_0_18px_rgba(248,190,42,0.8)]'
-                            >
-                                Community
-                            </Link>
+                            <NavLink href="/community">Community</NavLink>
                         </li>
                     </ul>
                 </nav>
