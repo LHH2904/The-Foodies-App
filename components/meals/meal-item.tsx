@@ -21,12 +21,14 @@ export default function MealItem(
     return (
         <article
             className="flex flex-col justify-between h-full rounded-sm shadow-md shadow-black/30 overflow-hidden transition-all duration-300 ease-in-out text-[#ddd6cb] bg-gradient-to-r from-[#2c1e19] to-[#25200f]">
-            <header className='relative h-60'>
-                <Image src={image} alt={title} fill/>
-                <div
-                    className="absolute bottom-0 left-0 right-0 p-2.5 pt-0 text-white bg-gradient-to-t from-black/70 to-transparent">
-                    <h2 className='m-0 text-2xl font-montserrat'>{title}</h2>
-                    <p className='text-xs italic text-[#cfa69b] m-0'>by {creator}</p>
+            <header>
+                <div className='relative h-80'>
+                    <Image src={image} alt={title} fill className='object-cover'/>
+                    <div
+                        className="absolute bottom-0 left-0 right-0 p-2.5 pt-0 text-white bg-gradient-to-t from-black/70 to-transparent">
+                        <h2 className='m-0 text-2xl font-montserrat'>{title}</h2>
+                        <p className='text-xs italic text-[#cfa69b] m-0'>by {creator}</p>
+                    </div>
                 </div>
             </header>
             <div className="flex flex-col justify-between h-full">
