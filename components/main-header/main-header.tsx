@@ -20,6 +20,7 @@ export default function MainHeader() {
                         alt="A plate with food on it"
                         width={80}
                         height={80}
+                        priority
                         className="w-20 h-20 object-contain drop-shadow-[0_0_12px_rgba(0,0,0,0.5)]"
                     />
                     The Foodies
