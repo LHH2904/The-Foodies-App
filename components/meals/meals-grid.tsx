@@ -1,7 +1,8 @@
-import MealItem, {MealItemProps} from "@/components/meals/meal-item";
+import MealItem from "@/components/meals/meal-item";
+import {Meal} from "@/lib/meals";
 
 interface MealsGridProps {
-    meals: MealItemProps[]
+    meals: Meal[]
 }
 
 export default function MealsGrid({meals}: MealsGridProps) {
