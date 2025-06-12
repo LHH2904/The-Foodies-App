@@ -4,7 +4,6 @@ import xss from "xss";
 import path from "node:path";
 import * as fs from "node:fs";
 
-
 export interface Meal {
     title: string;
     slug?: string;
@@ -31,7 +30,7 @@ export async function getMeals() {
 }
 
 export function getMeal(slug: string) {
-    return db.prepare('SELECT * FROM meals WHERE slug = ?').get(slug) as Meal | undefined;
+    return db.prepare('SELECT * FROM meals WHERE slug = ?').get(slug) as Meal;
 }
 
 export async function saveMeal(meal: Meal & { imageFile: File }) {
@@ -54,7 +53,7 @@ export async function saveMeal(meal: Meal & { imageFile: File }) {
 
     // 🌟 3. Gọi hàm lưu ảnh
     await saveImage(meal.imageFile, fileName);
-    
+
     meal.image = `/images/${fileName}`; // ← lưu đường dẫn đến ảnh
 
     db.prepare(`

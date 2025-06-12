@@ -1,15 +1,24 @@
 import Image from "next/image";
-import {getMeal, Meal} from "@/lib/meals";
+import {getMeal} from "@/lib/meals";
 import {notFound} from "next/navigation";
 
-interface MealsDetailsPageProps {
-    params: {
-        mealSlug: string;
-    };
+export async function generateMetadata(props: { params: Promise<{ mealSlug: string }> }) {
+    const {mealSlug} = await props.params;
+    const meal = getMeal(mealSlug);
+
+    if (!meal) {
+        notFound();
+    }
+
+    return {
+        title: meal.title,
+        description: meal.summary
+    }
 }
 
-export default function MealsDetailsPage({params}: MealsDetailsPageProps) {
-    const meal: Meal | undefined = getMeal(params.mealSlug)
+export default async function MealsDetailsPage(props: { params: Promise<{ mealSlug: string }> }) {
+    const {mealSlug} = await props.params;
+    const meal = getMeal(mealSlug);
 
     if (!meal) {
         notFound();

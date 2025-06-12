@@ -2,9 +2,11 @@
 import ImagePicker from "@/components/meals/image-picker";
 import {shareMeal} from "@/lib/actions";
 import MealsFormSubmit from "@/components/meals/meals-form-submit";
+import {useActionState} from "react";
 
 
 export default function ShareMealsPage() {
+    const [state, formAction] = useActionState(shareMeal, {message: ''});
 
     return (
         <>
@@ -16,7 +18,7 @@ export default function ShareMealsPage() {
                 <p>Or any other meal you feel needs sharing!</p>
             </header>
             <main className='w-[90%] max-w-[75rem] my-12 mx-auto text-white'>
-                <form className='max-w-[50rem]' action={shareMeal}>
+                <form className='max-w-[50rem]' action={formAction}>
                     <div className='flex gap-4'>
                         <p className='w-[100%]'>
                             <label
@@ -95,6 +97,11 @@ export default function ShareMealsPage() {
                         ></textarea>
                     </p>
                     <ImagePicker name='image' label='Your image'/>
+                    {state.message && (
+                        <p className={state.message.includes('successfully') ? 'text-green-500' : 'text-red-500'}>
+                            {state.message}
+                        </p>
+                    )}
                     <p className='text-right'>
                         <MealsFormSubmit/>
                     </p>
