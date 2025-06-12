@@ -1,13 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
+import {Meal} from "@/lib/meals";
 
-export interface MealItemProps {
-    title: string;
-    slug: string;
-    image: string;
-    summary: string;
-    creator: string;
-}
 
 export default function MealItem(
     {
@@ -16,7 +10,7 @@ export default function MealItem(
         image,
         summary,
         creator
-    }: MealItemProps
+    }: Meal
 ) {
     return (
         <article
