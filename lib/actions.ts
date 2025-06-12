@@ -2,12 +2,17 @@
 
 import {saveMeal} from "@/lib/meals";
 import {redirect} from "next/navigation";
+import {revalidatePath} from "next/cache";
 
-export async function shareMeal(formData: FormData) {
+function isInvalidText(text: string) {
+    return !text || text.trim() === '';
+}
+
+export async function shareMeal(_: unknown, formData: FormData) {
     const imageFile = formData.get('image');
 
     // 🛡️ Kiểm tra file ảnh
-    if (!(imageFile instanceof File)) {
+    if (!(imageFile instanceof File) || imageFile.size === 0) {
         throw new Error('Image file is missing or invalid.');
     }
 
@@ -18,27 +23,27 @@ export async function shareMeal(formData: FormData) {
     const creator = formData.get('name');
     const creator_email = formData.get('email');
 
-    if (
-        typeof title !== 'string' ||
-        typeof summary !== 'string' ||
-        typeof instructions !== 'string' ||
-        typeof creator !== 'string' ||
-        typeof creator_email !== 'string'
-    ) {
-        throw new Error('Form data is invalid.');
+    const requiredFields = [title, summary, instructions, creator, creator_email];
+    if (requiredFields.some(field => typeof field !== 'string' || isInvalidText(field))) {
+        return {message: 'Invalid input.'};
+    }
+
+    if (!(creator_email as string).includes('@')) {
+        return {message: 'Invalid email address.'};
     }
 
     const meal = {
-        title,
-        summary,
-        instructions,
-        image: '', // sẽ được gán trong saveMeal
-        slug: '',  // sẽ được gán trong saveMeal
-        imageFile,
-        creator,
-        creator_email,
-    }
+        title: title as string,
+        summary: summary as string,
+        instructions: instructions as string,
+        image: '', // sẽ được set trong saveMeal
+        slug: '',  // sẽ được set trong saveMeal
+        imageFile: imageFile as File,
+        creator: creator as string,
+        creator_email: creator_email as string,
+    };
 
     await saveMeal(meal);
+    revalidatePath('/meals')
     redirect('/meals');
 }
